@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR Boutique - Ladies Tailoring & Fashion Design</title>
+    <style>
+        /* ============================================
+           CSS VARIABLES & ROOT STYLES
+           ============================================ */
+        :root {
+            --primary-pink: #d4a5a5;
+            --soft-pink: #f5e6e6;
+            --deep-pink: #c68a8a;
+            --beige: #f5f1ed;
+            --cream: #fdfbf7;
+            --dark-text: #4a4a4a;
+            --light-text: #7a7a7a;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(212, 165, 165, 0.2);
+            --shadow-hover: 0 8px 25px rgba(212, 165, 165, 0.3);
+        }
+
+        /* ============================================
+           GENERAL STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           NAVIGATION BAR
+           ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--deep-pink);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--deep-pink);
+            border-bottom-color: var(--gold);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--deep-pink);
+            border-radius: 2px;
+            transition: 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .hero {
+            margin-top: 60px;
+            height: 80vh;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--beige) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary-pink) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--deep-pink);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--light-text);
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-pink) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-gallery {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            width: 250px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--deep-pink);
+            margin-bottom: 3rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--gold));
+            border-radius: 2px;
+        }
+
+        #services {
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--beige) 0%, var(--soft-pink) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-pink);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--deep-pink);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           GALLERY SECTION
+           ============================================ */
+        #gallery {
+            background-color: var(--beige);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 165, 165, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        #about {
+            background-color: var(--white);
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--gold) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: var(--shadow);
+        }
+
+        .about-content h2 {
+            color: var(--deep-pink);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-content p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .founders {
+            background: var(--soft-pink);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--primary-pink);
+        }
+
+        .founders h3 {
+            color: var(--deep-pink);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .founders p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           BOOKING SECTION
+           ============================================ */
+        #booking {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--beige) 100%);
+        }
+
+        .booking-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--deep-pink);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--beige);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+            background-color: var(--cream);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-pink) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: #e74c3c;
+            background-color: #fadbd8;
+        }
+
+        /* ============================================
+           PRICING SECTION
+           ============================================ */
+        #pricing {
+            background-color: var(--white);
+        }
+
+        .pricing-table {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+            box-shadow: var(--shadow);
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--deep-pink) 100%);
+            color: var(--white);
+        }
+
+        th {
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--beige);
+            color: var(--light-text);
+        }
+
+        tbody tr:hover {
+            background-color: var(--beige);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        #contact {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--beige) 100%);
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h3 {
+            color: var(--deep-pink);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-pink);
+        }
+
+        .contact-item p {
+            color: var(--light-text);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25d366;
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--dark-text);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--primary-pink);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        footer p {
+            color: #bbb;
+        }
+
+        /* ============================================
+           MODAL
+           ============================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h2 {
+            color: var(--deep-pink);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-content p {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .modal-close-btn {
+            background: var(--primary-pink);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modal-close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                border-bottom: 2px solid var(--beige);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .hero-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-image {
+                width: 200px;
+                height: 250px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-brand {
+                font-size: 1.3rem;
+            }
+
+            .hero {
+                margin-top: 50px;
+                height: auto;
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .booking-container {
+                padding: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         NAVIGATION BAR
+         ============================================ -->
+    <nav>
+        <a href="#home" class="nav-brand">✨ SR Boutique</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#booking">Booking</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>SR Boutique</h1>
+            <p class="tagline">"Designed for Women, Stitched with Love"</p>
+            <button class="cta-button" onclick="scrollTo('booking')">Book Now</button>
+            
+            <div class="hero-gallery">
+                <div class="hero-image" title="Elegant Suits">👗</div>
+                <div class="hero-image" title="Stunning Lehengas">✨</div>
+                <div class="hero-image" title="Designer Dresses">💎</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SERVICES SECTION
+         ============================================ -->
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <!-- Ladies Suit Stitching -->
+            <div class="service-card">
+                <div class="service-icon">👗</div>
+                <h3>Ladies Suit Stitching</h3>
+                <p>Perfectly tailored suits designed to complement your style. Custom fits and premium quality stitching for the modern woman.</p>
+            </div>
+
+            <!-- Lehenga Stitching -->
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Lehenga Stitching</h3>
+                <p>Beautiful, intricate lehengas crafted with precision. Perfect for weddings, festivals, and special occasions with impeccable detailing.</p>
+            </div>
+
+            <!-- Blouse Designing -->
+            <div class="service-card">
+                <div class="service-icon">💎</div>
+                <h3>Blouse Designing</h3>
+                <p>Custom designed blouses that match your sarees perfectly. Unique designs with traditional and modern elements for every occasion.</p>
+            </div>
+
+            <!-- Alterations -->
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Alterations & Repairs</h3>
+                <p>Expert alterations for all types of garments. Whether it's hemming, resizing, or repairs, we ensure your clothes fit perfectly.</p>
+            </div>
+
+            <!-- Designer Dresses -->
+            <div class="service-card">
+                <div class="service-icon">👸</div>
+                <h3>Designer Dresses</h3>
+                <p>Exclusive designer dresses tailored to your preferences. From casual to formal wear, we bring your fashion dreams to life.</p>
+            </div>
+
+            <!-- Kids Clothing -->
+            <div class="service-card">
+                <div class="service-icon">👧</div>
+                <h3>Kids Clothing</h3>
+                <p>Adorable and comfortable clothing for girls of all ages. Safe, quality fabric with fun and trendy designs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         GALLERY SECTION
+         ============================================ -->
+    <section id="gallery">
+        <h2 class="section-title">Our Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-overlay">Elegant Suits</div>
+                👗
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Bridal Lehengas</div>
+                💍
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Party Dresses</div>
+                ✨
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Casual Wear</div>
+                👕
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Ethnic Wear</div>
+                🌸
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Custom Designs</div>
+                💎
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Kids Fashion</div>
+                👧
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Festival Wear</div>
+                🎉
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">Formal Attire</div>
+                🎩
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         ABOUT SECTION
+         ============================================ -->
+    <section id="about">
+        <h2 class="section-title">About SR Boutique</h2>
+        <div class="about-container">
+            <div class="about-image">👩‍🎨</div>
+            <div class="about-content">
+                <h2>Our Story</h2>
+                <p>Welcome to SR Boutique, where passion meets precision. We are a family-based boutique inspired by the vision of Sandhya and Ramishwar, two dedicated professionals with decades of experience in tailoring and fashion design.</p>
+                
+                <p>Our specialty lies in creating custom-designed garments exclusively for women and girls. From elegant suits to stunning lehengas, from intricate blouses to exclusive designer dresses, every piece is crafted with love and attention to detail.</p>
+                
+                <p>We believe that every woman deserves clothing that makes her feel confident and beautiful. Our skilled designers and tailors work closely with each client to understand their unique style and preferences, bringing their fashion dreams to life.</p>
+
+                <div class="founders">
+                    <h3>👩‍💼 Meet Our Founders</h3>
+                    <p><strong>Sandhya:</strong> Lead Designer with 20+ years of experience in fashion design and custom tailoring.</p>
+                    <p><strong>Ramishwar:</strong> Master Tailor with expertise in precision stitching and quality craftsmanship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PRICING SECTION
+         ============================================ -->
+    <section id="pricing">
+        <h2 class="section-title">Pricing</h2>
+        <div class="pricing-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Price (Starting from)</th>
+                        <th>Delivery Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ladies Suit Stitching</td>
+                        <td>₹800 - ₹1,500</td>
+                        <td>7-10 days</td>
+                    </tr>
+                    <tr>
+                        <td>Lehenga Stitching</td>
+                        <td>₹1,500 - ₹3,500</td>
+                        <td>10-14 days</td>
+                    </tr>
+                    <tr>
+                        <td>Blouse Designing</td>
+                        <td>₹400 - ₹800</td>
+                        <td>5-7 days</td>
+                    </tr>
+                    <tr>
+                        <td>Alterations & Repairs</td>
+                        <td>₹300 - ₹700</td>
+                        <td>3-5 days</td>
+                    </tr>
+                    <tr>
+                        <td>Designer Dresses</td>
+                        <td>₹1,200 - ₹2,500</td>
+                        <td>8-12 days</td>
+                    </tr>
+                    <tr>
+                        <td>Kids Clothing</td>
+                        <td>₹500 - ₹1,000</td>
+                        <td>5-7 days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ============================================
+         BOOKING SECTION
+         ============================================ -->
+    <section id="booking">
+        <h2 class="section-title">Book Your Appointment</h2>
+        <div class="booking-container">
+            <form id="bookingForm" onsubmit="handleBooking(event)">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    <div class="error-message" id="nameError">Please enter a valid name (min 3 characters)</div>
+                </div>
+
+                <!-- Phone & Email -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit number" required>
+                        <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                    <div class="error-message" id="addressError">Please enter a valid address (min 5 characters)</div>
+                </div>
+
+                <!-- Service & Dress Type -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="service">Service Type *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="Ladies Suit">Ladies Suit Stitching</option>
+                            <option value="Lehenga">Lehenga Stitching</option>
+                            <option value="Blouse">Blouse Designing</option>
+                            <option value="Alterations">Alterations & Repairs</option>
+                            <option value="Designer Dress">Designer Dresses</option>
+                            <option value="Kids Clothing">Kids Clothing</option>
+                        </select>
+                        <div class="error-message" id="serviceError">Please select a service</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Preferred Date *</label>
+                        <input type="date" id="date" name="date" required>
+                        <div class="error-message" id="dateError">Please select a future date</div>
+                    </div>
+                </div>
+
+                <!-- Measurements -->
+                <div class="form-group">
+                    <label for="measurements">Measurement Details</label>
+                    <textarea id="measurements" name="measurements" placeholder="Enter your measurements or design preferences (Chest, Waist, Length, etc.)" style="font-family: inherit;"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Book Appointment</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT SECTION
+         ============================================ -->
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+
+                <!-- Phone -->
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <p><strong>Phone:</strong> +91 98765 43210</p>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <p><strong>Email:</strong> info@srboutique.com</p>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <p><strong>Address:</strong><br>123 Fashion Street, City Center<br>Your City, State 123456</p>
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="contact-item" style="margin-top: 2rem;">
+                    <a href="https://wa.me/919876543210" class="whatsapp-btn" target="_blank">
+                        💬 Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Google Maps -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.2456789012345!2d72.5!3d21.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjEuMTAwMCwgNzIuNTAwMA!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com" target="_blank" title="Facebook">f</a>
+            <a href="https://www.instagram.com" target="_blank" title="Instagram">📷</a>
+            <a href="https://www.twitter.com" target="_blank" title="Twitter">𝕏</a>
+            <a href="https://www.pinterest.com" target="_blank" title="Pinterest">📌</a>
+        </div>
+        <p>&copy; 2026 SR Boutique. All rights reserved. | Designed for Women, Stitched with Love ❤️</p>
+    </footer>
+
+    <!-- ============================================
+         SUCCESS MODAL
+         ============================================ -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2>✨ Booking Confirmed!</h2>
+            <p>Thank you for booking with SR Boutique. We will contact you shortly to confirm your appointment details.</p>
+            <button class="modal-close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // ============================================
+        // NAVIGATION & SMOOTH SCROLLING
+        // ============================================
+
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling function
+        function scrollTo(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        }
+
+        // ============================================
+        // FORM VALIDATION & BOOKING
+        // ============================================
+
+        /**
+         * Validate full name
+         * Checks: Not empty, minimum 3 characters
+         */
+        function validateName(name) {
+            return name.trim().length >= 3;
+        }
+
+        /**
+         * Validate phone number
+         * Checks: Exactly 10 digits
+         */
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone.trim());
+        }
+
+        /**
+         * Validate email address
+         * Checks: Valid email format
+         */
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email.trim());
+        }
+
+        /**
+         * Validate address
+         * Checks: Minimum 5 characters
+         */
+        function validateAddress(address) {
+            return address.trim().length >= 5;
+        }
+
+        /**
+         * Validate service selection
+         */
+        function validateService(service) {
+            return service !== '';
+        }
+
+        /**
+         * Validate appointment date
+         * Checks: Date is not in the past
+         */
+        function validateDate(date) {
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return selectedDate >= today;
+        }
+
+        /**
+         * Show error message for a field
+         */
+        function showError(fieldName, message) {
+            const input = document.getElementById(fieldName);
+            const errorDiv = document.getElementById(fieldName + 'Error');
+            input.classList.add('error');
+            errorDiv.classList.add('show');
+        }
+
+        /**
+         * Hide error message for a field
+         */
+        function hideError(fieldName) {
+            const input = document.getElementById(fieldName);
+            const errorDiv = document.getElementById(fieldName + 'Error');
+            input.classList.remove('error');
+            errorDiv.classList.remove('show');
+        }
+
+        /**
+         * Handle booking form submission
+         * Validates all fields and stores booking in localStorage
+         */
+        function handleBooking(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const measurements = document.getElementById('measurements').value;
+
+            // Reset all error messages
+            ['name', 'phone', 'email', 'address', 'service', 'date'].forEach(field => {
+                hideError(field);
+            });
+
+            let isValid = true;
+
+            // Validate each field
+            if (!validateName(name)) {
+                showError('name', 'Please enter a valid name (min 3 characters)');
+                isValid = false;
+            } else {
+                hideError('name');
+            }
+
+            if (!validatePhone(phone)) {
+                showError('phone', 'Please enter a valid 10-digit phone number');
+                isValid = false;
+            } else {
+                hideError('phone');
+            }
+
+            if (!validateEmail(email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            } else {
+                hideError('email');
+            }
+
+            if (!validateAddress(address)) {
+                showError('address', 'Please enter a valid address (min 5 characters)');
+                isValid = false;
+            } else {
+                hideError('address');
+            }
+
+            if (!validateService(service)) {
+                showError('service', 'Please select a service');
+                isValid = false;
+            } else {
+                hideError('service');
+            }
+
+            if (!validateDate(date)) {
+                showError('date', 'Please select a future date');
+                isValid = false;
+            } else {
+                hideError('date');
+            }
+
+            // If all validations pass, save booking and show success modal
+            if (isValid) {
+                const booking = {
+                    id: Date.now(),
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    address: address,
+                    service: service,
+                    date: date,
+                    measurements: measurements,
+                    bookingDate: new Date().toLocaleString()
+                };
+
+                // Save to localStorage
+                let bookings = JSON.parse(localStorage.getItem('srBoutiqueBookings')) || [];
+                bookings.push(booking);
+                localStorage.setItem('srBoutiqueBookings', JSON.stringify(bookings));
+
+                // Log to console for debugging
+                console.log('Booking saved:', booking);
+                console.log('All bookings:', bookings);
+
+                // Reset form
+                document.getElementById('bookingForm').reset();
+
+                // Show success modal
+                showModal();
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ============================================
+        // MODAL FUNCTIONS
+        // ============================================
+
+        /**
+         * Show success modal
+         */
+        function showModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('show');
+        }
+
+        /**
+         * Close success modal
+         */
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('show');
+        }
+
+        /**
+         * Close modal when clicking outside
+         */
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('successModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // ============================================
+        // VIEW BOOKINGS FUNCTION
+        // ============================================
+
+        /**
+         * View all bookings stored in localStorage
+         * Run this in browser console: viewBookings()
+         */
+        function viewBookings() {
+            const bookings = JSON.parse(localStorage.getItem('srBoutiqueBookings')) || [];
+            console.log('=== SR BOUTIQUE BOOKINGS ===');
+            console.log(`Total Bookings: ${bookings.length}`);
+            console.table(bookings);
+        }
+
+        // ============================================
+        // PAGE LOAD INITIALIZATION
+        // ============================================
+
+        // Set minimum date in date picker to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+
+            // Log app info
+            console.log('✨ Welcome to SR Boutique!');
+            console.log('📱 To view bookings, run: viewBookings()');
+        });
+
+        // ============================================
+        // SCROLL ANIMATIONS
+        // ============================================
+
+        /**
+         * Add scroll animation to service cards
+         */
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and gallery items
+        document.querySelectorAll('.service-card, .gallery-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
